@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.http import JsonResponse
 from rest_framework import generics
 from .models import TextText
@@ -12,7 +13,7 @@ class CreateTextTextView(generics.CreateAPIView):
 def get_all_texttexts(request):       
     if request.method=='GET':
         texttexts = TextText.objects.all()
-        data = [{'french': text.french, 'moore': text.moore} for text in texttexts]
+        data = [{'french': text.french, 'moore': text.moore, 'date_saisie': timezone.now()} for text in texttexts]
         return JsonResponse(data, safe=False)
 
 

@@ -4,4 +4,4 @@ from .models import TextText
 class TextTextSerializer(serializers.ModelSerializer):
     class Meta:
         model = TextText
-        fields = ['french', 'moore']
+        fields = ['french', 'moore', 'date_saisie']
