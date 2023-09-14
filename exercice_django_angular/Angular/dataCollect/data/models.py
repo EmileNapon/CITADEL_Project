@@ -5,6 +5,7 @@ from django.db import models
 class TextText(models.Model):
     french = models.TextField(unique=True)
     moore = models.TextField()
-    date_saisie= models.DateField(auto_now_add=True)
-
-
+    date_saisie= models.DateTimeField(auto_now_add=True)
+    nouvellesDonnees = models.BooleanField(default=False) 
+    
+  

@@ -1,4 +1,4 @@
-from django.utils import timezone
+
 from django.http import JsonResponse
 from rest_framework import generics
 from .models import TextText
@@ -7,13 +7,23 @@ from .serializers import TextTextSerializer
 class CreateTextTextView(generics.CreateAPIView):
     queryset = TextText.objects.all()
     serializer_class = TextTextSerializer
+    def perform_create(self, serializer):
+        serializer.save(nouvellesDonnees=True)
 
 
 # GET OF TEXT.TEXT
-def get_all_texttexts(request):       
+def get_all_texttextEmploye(request):       
     if request.method=='GET':
         texttexts = TextText.objects.all()
-        data = [{'french': text.french, 'moore': text.moore, 'date_saisie': timezone.now()} for text in texttexts]
+        data = [{'french': text.french, 'moore': text.moore, 'date_saisie': text.date_saisie} for text in texttexts]
         return JsonResponse(data, safe=False)
 
-
+def get_all_texttextExpert(request):       
+    if request.method == 'GET':
+        texttexts = TextText.objects.filter(nouvellesDonnees=True)  
+        data = [{'french': text.french, 'moore': text.moore, 'date_saisie': text.date_saisie} for text in texttexts]
+        for text in texttexts:
+            text.nouvellesDonnees = False
+            text.save()  # Réinitialiser le champ nouvellesDonnees après récupération
+        
+        return JsonResponse(data, safe=False)
