@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'data',
     'rest_framework',
     'corsheaders',
+    'Expert'
 ]
 
 MIDDLEWARE = [
