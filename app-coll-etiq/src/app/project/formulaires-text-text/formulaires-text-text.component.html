@@ -1,0 +1,101 @@
+<div class="container">
+<div class="card">
+<body class="bd">
+<div class="form-container">
+  <div class="align">
+                       <p >French</p> 
+                       <p class="align1">Moore</p>
+  </div>
+<div *ngFor="let form of myForms; let i = index" class="bd">
+    <form [formGroup]="form">
+      <!-- Vos champs -->
+      <div class='ecart1'> 
+
+
+
+      <div class="mb-3s" class="ecart2">
+        <label for="french{{i}}" class="form-label"></label>
+        <textarea 
+                  class="custom-textarea"  
+                  id="french{{i}}" 
+                  rows="3"
+                  cols="100" 
+                  formControlName="french" >
+        </textarea>
+
+
+      </div>
+
+      
+      <div class="mb-2" class="ecart2">
+        <label for="moore{{i}}" class="form-label"></label>
+        <textarea 
+            class="custom-textarea"
+            id="moore{{i}}"
+            rows="3"
+            cols="100"
+            formControlName="moore" >
+          </textarea> 
+
+      </div>
+    </div>
+
+    </form>
+
+  </div>
+
+  <div class="keyboard">
+    
+    <app-keyboard (characterClicked)="onCharacterClicked($event)" ></app-keyboard>
+  </div>
+<div class='ecart1'>
+  
+  <div class='ecart2'><button type="button" (click)="ajouterFormulaire()" [disabled]="!formulaireValide(myForms.length - 1)">nouveau</button></div>
+  <div class='ecart2'> <button type="button" (click)="submitAllForms()" [disabled]="!validerTousLesFormulaires()">Valider </button></div>
+</div>
+</div>
+
+
+</body>
+</div>
+</div>
+<br/><br/>
+<div class="container">
+  
+    <button (click)="afficherDonnees()">My projects</button>
+    <div *ngIf="afficherTableau">
+      
+      <div class="card">
+      <div class="card-body">
+      <div class="table-responsive"> 
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort class="table">
+            <!-- Colonne "french" -->
+            <ng-container matColumnDef="french">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> <h3 class='p' >french</h3></th>
+              <td mat-cell *matCellDef="let row"> {{row.french}} </td>
+            </ng-container>
+            <!-- Colonne "moore" -->
+            <ng-container matColumnDef="moore">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> <h3 class='p'>Moore</h3>  </th>
+              <td mat-cell *matCellDef="let row"> {{row.moore}} </td>            
+            </ng-container>
+            
+            <ng-container matColumnDef="date_saisie">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header><h3 class='p'>date</h3></th>
+              <td mat-cell *matCellDef="let row"> {{row.date_saisie | date: 'dd/MM/yyyy'}} </td>            
+            </ng-container>
+
+            <!-- Associer les colonnes au tableau -->
+            <tr mat-header-row *matHeaderRowDef="['french', 'moore','date_saisie']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['french', 'moore', 'date_saisie']"></tr>
+          </table>       
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+ 
