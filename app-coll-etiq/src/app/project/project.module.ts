@@ -31,7 +31,7 @@ import { KeyboardComponent } from './keyboard/keyboard.component';
     FormulairesAudioTextComponent,
 
     ListprojectExpertComponent,
-    KeyboardComponent, 
+    KeyboardComponent
   ],
   imports: [
     CommonModule, RouterModule,FormsModule,ReactiveFormsModule,HttpClientModule,MatTableModule,MatSortModule

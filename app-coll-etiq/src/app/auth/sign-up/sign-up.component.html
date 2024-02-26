@@ -8,9 +8,11 @@
             <div class="form-container sign-in-container">
                      
                 <form [formGroup]="form" (submit)="submit()">
-                    <input type="string" placeholder="User name" name="name" formControlName="name" required />
+                    <input type="string" placeholder="name" name="name" formControlName="name" required />
+                   
                     <input type="email" placeholder="Email" name="email" formControlName="email" required  />
                     <input type="password" placeholder="Password" name="password" formControlName="password" required/>
+                    <input type="string" placeholder="User name" name="name" formControlName="name" required />
                     <br/>
                     <select id="role" name="role" required class="role-select" formControlName="role"  >
                         <option value="employer" >worker</option>

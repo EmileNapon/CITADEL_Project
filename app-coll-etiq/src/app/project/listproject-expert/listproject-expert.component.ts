@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
+import { KeyboardComponent } from '../keyboard/keyboard.component';
+KeyboardComponent
 @Component({
   selector: 'app-listproject-expert',
   templateUrl: './listproject-expert.component.html',
@@ -38,7 +39,7 @@ export class ListprojectExpertComponent {
 
 
   afficherDonneesEmployer() {
-    this.http.get('http://127.0.0.1:8000/employe/getExpert').subscribe(
+    this.http.get('http://127.0.0.1:8000/employe/getEmploye').subscribe(
       (data) => {
        
         this.dataSource.data = data as any[];
@@ -64,6 +65,7 @@ export class ListprojectExpertComponent {
 
   toggleEditMode(row: any) {
     row.editMode = !row.editMode;
+    
   }
 
   supprimerLigne(row: any) {
@@ -71,8 +73,35 @@ export class ListprojectExpertComponent {
     if (index >= 0) {
       this.dataRows.splice(index, 1);
       this.dataSource.data = this.dataRows; // Mettez à jour la source de données du tableau
+      
     }
   }
+  
+
+  
+
+
+
+  onCharacterClicked(char: string): void {
+    const activeForm = this.dataRows[this.dataRows.length - 1];
+    const mooreControl = activeForm.get('moore');
+  
+    if (mooreControl) {
+      mooreControl.setValue(mooreControl.value + char);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   envoyerDonneesExpert() {
@@ -99,4 +128,14 @@ export class ListprojectExpertComponent {
     );
   }
   
+  toggleKeyboard() {
+    const customKeyboard = document.getElementById('keyboard') as HTMLElement;
+    customKeyboard.classList.toggle('active');
+    console.log('ytdzfcguvhibjohpjokpjophiogiucgxfy')
+  }
+  
+   
+
+
+
 }

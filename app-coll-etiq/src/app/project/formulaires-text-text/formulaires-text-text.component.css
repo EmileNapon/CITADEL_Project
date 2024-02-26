@@ -1,7 +1,7 @@
 /* Style pour le conteneur du formulaire */
 
 .bd{
-  background-color: #eaeaebbb;
+  background-color: #ffffff;
 }
 
 .form-container {
@@ -9,8 +9,8 @@
   margin: auto;
   padding: 20px;
   background-color: #eaeaebbb;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  box-shadow: 0 4px 8px rgba(244, 241, 241, 0.1);
 
 
 }
@@ -20,7 +20,10 @@
 
 }
 .align1{
-   padding-left: 580px;
+   padding-left: 604px;
+}
+.align11{
+  padding-left: 400px;
 }
 
 /* Espacement entre les éléments */
@@ -29,7 +32,7 @@
 }
 
 .ecart2 {
-  margin-right: 10px;
+  
   display: inline-block;
 }
 
@@ -40,7 +43,7 @@
 /* Style pour les étiquettes */
 .form-label {
   font-weight: bold;
-  color: #333333;
+  color: #ffffff;
 }
 
 
@@ -85,25 +88,24 @@ button:hover {
 
 /* Espacement entre les boutons "Valider" et "Nouveau" */
 .button-container {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 
 /* Style pour le champ de texte personnalisé */
 .custom-textarea {
   width: calc(100% - 20px);
-  height: 70px;
+  height: 60px;
   border: 1px solid #eaeaebbb;
-  border-radius: 5px;
-  padding: 10px;
   font-size: 16px;
-  margin-top: 5px;
-  box-sizing: border-box;
   resize: none;  /* Désactive la redimension */
   font-family: inherit;
-  line-height: 3;
-  border-radius: 14px ;
+  border: none;
+  outline: none;
+ 
 }
+
+
 
 .keyboard-button {
   display: inline-block;
@@ -114,7 +116,7 @@ button:hover {
 }
 
 .keyboard{
-  padding-left: 630px;
+  padding-left: 650px;
 }
 .error-message {
   color: red;
@@ -125,5 +127,19 @@ button:hover {
   color: brown;
   font-family:Georgia, 'Times New Roman', Times, serif;
   font-size: 130%;
+}
+
+.c{
+  padding: 5px;
+  background-color: #bab7b7;
+  text-align: center;
+  color:#ffffff;
+}
+.btn{
+  text-align: center;
+}
+
+.v{
+  display: inline-flex;
 }
 

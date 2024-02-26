@@ -88,8 +88,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #c8c4c4;
+	background-color: #aaa9a9;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -368,7 +368,7 @@ input[type=text] {
 
 
 .role-select {
-  background-color: aquamarine;
+  background-color: rgb(239, 242, 241);
   font-size: 16px; /* Ajustez la taille de la police selon vos préférences */
   width: 100%; /* Ajustez la largeur selon vos préférences */
   padding: 10px; /* Ajustez le padding (marges intérieures) selon vos préférences */

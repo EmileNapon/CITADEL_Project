@@ -7,8 +7,14 @@ from .serializers import TextTextSerializer
 class CreateTextTextView(generics.CreateAPIView):
     queryset = TextText.objects.all()
     serializer_class = TextTextSerializer
+    
     def perform_create(self, serializer):
         serializer.save(nouvellesDonnees=True)
+        # Récupérer l'URL de l'audio depuis la requête POST
+        audio_url = self.request.data.get('audioUrl')
+        
+        # Enregistrer l'URL dans le champ audioURL
+        serializer.save(audioURL=audio_url)
 
 
 # GET OF TEXT.TEXT

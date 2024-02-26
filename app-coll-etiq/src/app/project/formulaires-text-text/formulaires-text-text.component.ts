@@ -1,10 +1,15 @@
 
 import { Component,  Output, EventEmitter  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import * as RecordRTC from 'recordrtc';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { FormBuilder, FormGroup, Validators,FormArray, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { KeyboardComponent } from '../keyboard/keyboard.component';
+
+
+KeyboardComponent
 
 @Component({
   selector: 'app-formulaires-text-text',
@@ -15,22 +20,50 @@ export class FormulairesTextTextComponent {
  
   dataSource = new MatTableDataSource<any>();
   formulaireModification!: FormGroup; // Ajoutez cette ligne
-
+  
+  
   donnees: any;  // Définissez un champ pour stocker les 
   myForms: FormGroup[] = [];
   valeurs: any[] = [];
-  afficherTableau: boolean = false;
-
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) {
+  //afficherTableau :boolean =false;
+  
+  
+  //afficherIconeClavier: boolean[] = [];
+  afficherIconeClavier : boolean[]=[true];
+  afficherIconemicro : boolean[]=[true];
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private domSanitizer: DomSanitizer) {
     this.addForm(); // Ajouter un premier formulaire
+
+
+
+    
   }
 
   addForm() {
     const formGroup = this.formBuilder.group({
       french: ['', [Validators.required, this.validateWordCount]],
       moore: ['', [Validators.required, this.validateWordCount]],
+      
     });
     this.myForms.push(formGroup);
+    
+    if (this.afficherIconeClavier.length > 0) {
+      
+      
+      this.afficherIconeClavier[this.afficherIconeClavier.length-1]=true ;
+      this.afficherIconemicro[this.afficherIconemicro.length-1]=true ;
+      this.afficherIconeClavier.length++;
+      this.afficherIconemicro.length++ ;
+    }
+   for(var i=1;i<this.afficherIconeClavier.length-2; i++){
+    this.afficherIconeClavier[i]=false ;
+    this.afficherIconemicro[i]=false;
+   }
+   if(this.afficherIconeClavier.length-2>=1){
+    this.afficherIconeClavier[0]=false;
+    this.afficherIconemicro[0]=false;
+   }
+
     
   }
   
@@ -50,35 +83,42 @@ export class FormulairesTextTextComponent {
     return null;
 }
 
+submitAllForms() {
+  for (const formGroup of this.myForms) {
+    if (formGroup.valid) {
+      const index = this.myForms.indexOf(formGroup);
+      const formData = formGroup.value;
 
-  submitAllForms() {
-    for (const formGroup of this.myForms) {
-      if (formGroup.valid) {
-        const formData = formGroup.value;
-        console.log(formGroup.value); // Envoyer les données à votre backend
 
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json'
-        });
-      
-        this.http.post('http://127.0.0.1:8000/employe/postEmploye', formData, { headers }).subscribe(
-          response => {
-            console.log('Données envoyées avec succès', response);
-            formGroup.reset();
-          },
-        );
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+
+      this.http.post('http://127.0.0.1:8000/postEmploye/employe', formData, { headers }).subscribe(
+        response => {
+          console.log('Données envoyées avec succès', response);
+          formGroup.reset();
+        },
+        error => {
+          console.error('Erreur lors de l\'envoi des données : ', error);
         }
-      }
-
-    
+      );
+    }
   }
+}
+
+
+
 
   ajouterFormulaire() {
+    
     if (this.myForms[this.myForms.length - 1].valid) {
       this.addForm(); // Ajouter un nouveau formulaire seulement si le dernier est valide
-      
-     
+
+       
     }
+   
   }
 
   formulaireValide(index: number) {
@@ -99,16 +139,19 @@ export class FormulairesTextTextComponent {
   
 
   afficherDonnees() { 
-    this.afficherTableau = true;  
+     
     this.http.get('http://127.0.0.1:8000/employe/getEmploye').subscribe(
     (data) => {
       this.dataSource.data = data as any[];
       console.log('Données récupérées avec succès :', data);
     },
-      
+    
     );
+   // this.afficherTableau=true;
+    
+} 
 
-}
+
 
   
   onCharacterClicked(char: string): void {
@@ -122,11 +165,45 @@ export class FormulairesTextTextComponent {
   
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   
 
+  toggleKeyboard() {
+    const customKeyboard = document.getElementById('keyboard') as HTMLElement;
+    customKeyboard.classList.toggle('active');
   }
   
+ 
+
+
+
+    }
+  
 
 
   
-  
+
